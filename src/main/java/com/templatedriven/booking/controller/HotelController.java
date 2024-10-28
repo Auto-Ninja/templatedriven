@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/api/v1/hotels")
+@RequestMapping("/hotels")
 @RestController("Hotel Api")
 public class HotelController implements IRestApiController<Hotel> {
 
