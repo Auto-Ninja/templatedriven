@@ -12,17 +12,18 @@ import java.util.List;
 
 public interface IRestApiController<TModel> {
 
+
     @PostMapping()
-    void Post(TModel model);
+    TModel Post(TModel model);
 
     @PutMapping("/{id}")
-    void Update(int Id,TModel model);
+    TModel Update(int id,TModel model);
 
     @DeleteMapping("/{id}")
-    void Delete(int id);
+    boolean Delete(int id);
 
     @GetMapping("/{id}")
-    TModel Get(int Id);
+    TModel Get(int id);
 
     @GetMapping()
     List<TModel> GetAll();
