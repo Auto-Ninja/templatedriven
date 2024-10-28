@@ -1,1 +1,5 @@
 Application Listening to http://localhost:8099/
+
+Swagger Url > http://localhost:8099/swagger-ui/index.html
+
+To Kill the port and reuse 8089 check link (https://sentry.io/answers/kill-process-using-port-in-windows/)
