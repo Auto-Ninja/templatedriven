@@ -20,12 +20,14 @@ pipeline
         {
             steps
             {
+                def rootDir = pwd()
                 echo 'building the application '
+                echo rootDir
                 //echo 'current version > ${NEW_VERSION} ${SERVERCREDENTIALS}'
                 sh 'mvn --version'
                 script
                 {
-                    gv = load "script.groovy"
+                    gv = load "./script.groovy"
                 }
             }
         }
