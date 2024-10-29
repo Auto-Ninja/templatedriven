@@ -1,12 +1,18 @@
 pipeline
 {
     agent any
+    environment
+    {
+        NEW_VERSION = '2.0.1'
+        SERVERCREDENTIALS =credentials('Server-credentials')
+    }
     stages {
         stage('build')
         {
             steps
             {
-                echo 'building the application'
+                echo 'building the application '
+                echos '''current version > ${NEW_VERSION} ${SERVERCREDENTIALS}''
             }
         }
         stage('test')
@@ -39,6 +45,14 @@ pipeline
             steps
             {
                 echo 'deploying the application'
+                withCredentials([
+                    usernamePassword(credentials:'Server-credentials',
+                    usernameVariable:USER,passwordVariable:PWD
+                    )
+                ])
+                {
+                    sh "some script ${USER} ${PWD}"
+                }
             }
         }        
     }
@@ -60,7 +74,7 @@ pipeline
     }
 }
 
-node
-{
+//node
+//{
 //groovy script
-}
+//}
