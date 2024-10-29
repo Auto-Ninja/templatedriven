@@ -1,3 +1,4 @@
+def gv
 pipeline
 {
     agent any
@@ -22,6 +23,10 @@ pipeline
                 echo 'building the application '
                 echo 'current version > ${NEW_VERSION} ${SERVERCREDENTIALS}'
                 sh 'mvn --version'
+                script
+                {
+                    gv = load "script.groovy"
+                }
             }
         }
         stage('test')
@@ -54,6 +59,10 @@ pipeline
             steps
             {
                 echo 'deploying the application'
+                script
+                {
+                    gv.TestFunc()
+                }
                 // withCredentials([
                 //     usernamePassword(credentials:'Server-credentials',
                 //     usernameVariable:USER,passwordVariable:PWD
