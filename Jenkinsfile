@@ -7,7 +7,6 @@ pipeline
         SERVERCREDENTIALS =credentials('Server-credentials')
     }
     parameters{
-        #string(name:'VERSION',defaultValue:'',description: 'version to deploy on prd')
         choice(name: 'VERSION',choices: ['1.2.1','1.2.2','2.1.0'])
         boolenParam(name: 'executeTests',defaultValue:true,description:'Decide to execute test in the build')
     }
