@@ -6,6 +6,15 @@ pipeline
         NEW_VERSION = '2.0.1'
         SERVERCREDENTIALS =credentials('Server-credentials')
     }
+    parameters{
+        #string(name:'VERSION',defaultValue:'',description: 'version to deploy on prd')
+        choice(name: 'VERSION',choices: ['1.2.1','1.2.2','2.1.0'])
+        boolenParam(name: 'executeTests',defaultValue:true,description:'Decide to execute test in the build')
+    }
+    tools
+    {
+        maven 'M2'
+    }
     stages {
         stage('build')
         {
@@ -13,6 +22,7 @@ pipeline
             {
                 echo 'building the application '
                 echos '''current version > ${NEW_VERSION} ${SERVERCREDENTIALS}''
+                sh 'mvn --version'
             }
         }
         stage('test')
@@ -32,7 +42,7 @@ pipeline
             {
                  expression
                 {
-                     BRANCH_NAME == 'feature/f1'
+                     BRANCH_NAME == 'feature/f1' && params.executeTests
                 }
             }
             steps
@@ -64,7 +74,7 @@ pipeline
         }
         sucess
         {
-            echo 'send am email that build is stable'
+            echo '''send am email that build is stable {params.VERSION}''
             //Execute integration test
         }
         failure
