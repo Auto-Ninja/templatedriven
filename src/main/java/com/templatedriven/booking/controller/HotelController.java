@@ -1,8 +1,10 @@
 package com.templatedriven.booking.controller;
 
 import com.templatedriven.booking.dto.Hotel;
+import com.templatedriven.booking.dto.Room;
 import com.templatedriven.booking.service.ICrudService;
 import com.templatedriven.booking.service.IHotelService;
+import com.templatedriven.booking.service.IRoomService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -39,3 +41,4 @@ public class HotelController implements IRestApiController<Hotel> {
         return _service.GetAll();
     }
 }
+

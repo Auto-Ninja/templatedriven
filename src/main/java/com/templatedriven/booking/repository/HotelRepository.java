@@ -1,6 +1,7 @@
 package com.templatedriven.booking.repository;
 
 import com.templatedriven.booking.dto.Hotel;
+import com.templatedriven.booking.dto.Room;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -56,3 +57,4 @@ public class HotelRepository implements IRepository<Hotel> {
         return false;
     }
 }
+
