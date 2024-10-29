@@ -7,15 +7,19 @@ pipeline
         NEW_VERSION = '2.0.1'
         //SERVERCREDENTIALS =credentials('Server-credentials')
     }
-    parameters{
+    parameters
+    {
         choice(name: 'VERSION',choices: ['1.2.1','1.2.2','2.1.0'])
         booleanParam(name: 'executeTests',defaultValue:true,description:'Decide to execute test in the build')
     }
     tools
     {
         maven 'M2'
+        groovy 'Groovy'
+        gradle 'Gradle'
     }
-    stages {
+    stages 
+    {
         stage('build')
         {
             steps
@@ -23,10 +27,26 @@ pipeline
                 echo 'building the application '
                 //echo 'current version > ${NEW_VERSION} ${SERVERCREDENTIALS}'
                 sh 'mvn --version'
+                // script
+                // {
+                //     println "check"
+                //     echo ('I am in Groovy Script')
+                //     echo (${WORKSPACE})
+                //     gv = load "${WORKSPACE}/script.groovy"
+                // }
                 script
                 {
-                    def rootDir = pwd()
-                    gv = load "${rootDir}/script.groovy"
+                    println("Inside Srcipt")
+                    def jenkins = jenkins.model.Jenkins.instance
+                    for (n in jenkins.nodes) {
+                    try {
+                        println("${n.nodeName}")
+                    } 
+                    catch (Exception e) 
+                    {
+                        println("Exception: ${e}")
+                    }
+                    }
                 }
             }
         }
