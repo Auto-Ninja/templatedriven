@@ -24,6 +24,22 @@ pipeline
             }
         }        
     }
+    post
+    {
+        always
+        {
+            echo 'send an email to team'
+        }
+        sucess
+        {
+            echo 'send am email that build is stable'
+            //Execute integration test
+        }
+        failure
+        {
+            echo 'send am email to build triggered person'
+        }
+    }
 }
 
 node
