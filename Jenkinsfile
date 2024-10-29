@@ -71,7 +71,7 @@ pipeline
         {
             echo 'send an email to team'
         }
-        sucess
+        success
         {
             echo '''send am email that build is stable {params.VERSION}''
             //Execute integration test
@@ -83,7 +83,3 @@ pipeline
     }
 }
 
-//node
-//{
-//groovy script
-//}
