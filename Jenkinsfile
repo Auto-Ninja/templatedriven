@@ -8,7 +8,7 @@ pipeline
     }
     parameters{
         choice(name: 'VERSION',choices: ['1.2.1','1.2.2','2.1.0'])
-        boolenParam(name: 'executeTests',defaultValue:true,description:'Decide to execute test in the build')
+        booleanParam(name: 'executeTests',defaultValue:true,description:'Decide to execute test in the build')
     }
     tools
     {
