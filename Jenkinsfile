@@ -20,7 +20,7 @@ pipeline
             steps
             {
                 echo 'building the application '
-                echos ''current version > ${NEW_VERSION} ${SERVERCREDENTIALS}''
+                echo ''current version > ${NEW_VERSION} ${SERVERCREDENTIALS}''
                 sh 'mvn --version'
             }
         }
