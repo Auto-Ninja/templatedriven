@@ -11,9 +11,27 @@ pipeline
         }
         stage('test')
         {
+            when
+            {
+                expression
+                {
+                    BRANCH_NAME == 'master' || BRANCH_NAME == 'master'
+                }
+            }
             steps
             {
-                echo 'testing the application'
+                echo 'testing the application in master dev code'
+            }
+            when
+            {
+                 expression
+                {
+                     BRANCH_NAME == 'feature/f1'
+                }
+            }
+            steps
+            {
+                echo 'testing the application in feature/f1'
             }
         }
         stage('deploy')
