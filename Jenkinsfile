@@ -20,7 +20,7 @@ pipeline
             steps
             {
                 echo 'building the application '
-                echos '''current version > ${NEW_VERSION} ${SERVERCREDENTIALS}''
+                echos ''current version > ${NEW_VERSION} ${SERVERCREDENTIALS}''
                 sh 'mvn --version'
             }
         }
@@ -73,7 +73,7 @@ pipeline
         }
         success
         {
-            echo '''send am email that build is stable {params.VERSION}''
+            echo ''send am email that build is stable {params.VERSION}''
             //Execute integration test
         }
         failure
