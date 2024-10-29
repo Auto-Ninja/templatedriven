@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequestMapping("/api/v1/hotels")
-@RestController("Hotel Api")
+@RestController("Hotel Api for managing CRUD")
 public class HotelController implements IRestApiController<Hotel> {
-
     @Autowired
     public IHotelService<Hotel> _service;
     @Operation(summary = "Create new Hotel")

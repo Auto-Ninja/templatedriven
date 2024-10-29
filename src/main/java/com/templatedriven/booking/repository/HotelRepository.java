@@ -34,7 +34,7 @@ public class HotelRepository implements IRepository<Hotel> {
         Hotel hotel=new Hotel();
         hotel.setId(id);
         hotel.setName("Hotel Name "+id);
-        hotel.setName("Hotel Location "+id);
+        hotel.setLocation("Hotel Location "+id);
         return hotel;
     }
 
