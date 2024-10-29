@@ -54,14 +54,14 @@ pipeline
             steps
             {
                 echo 'deploying the application'
-                withCredentials([
-                    usernamePassword(credentials:'Server-credentials',
-                    usernameVariable:USER,passwordVariable:PWD
-                    )
-                ])
-                {
-                    sh "some script ${USER} ${PWD}"
-                }
+                // withCredentials([
+                //     usernamePassword(credentials:'Server-credentials',
+                //     usernameVariable:USER,passwordVariable:PWD
+                //     )
+                // ])
+                // {
+                //     sh "some script ${USER} ${PWD}"
+                // }
             }
         }        
     }
