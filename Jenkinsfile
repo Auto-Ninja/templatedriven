@@ -20,7 +20,7 @@ pipeline
             steps
             {
                 echo 'building the application '
-                echo ''current version > ${NEW_VERSION} ${SERVERCREDENTIALS}''
+                echo 'current version > ${NEW_VERSION} ${SERVERCREDENTIALS}'
                 sh 'mvn --version'
             }
         }
@@ -37,17 +37,17 @@ pipeline
             {
                 echo 'testing the application in master dev code'
             }
-            when
-            {
-                 expression
-                {
-                     BRANCH_NAME == 'feature/f1' && params.executeTests
-                }
-            }
-            steps
-            {
-                echo 'testing the application in feature/f1'
-            }
+            // when
+            // {
+            //      expression
+            //     {
+            //          BRANCH_NAME == 'feature/f1' && params.executeTests
+            //     }
+            // }
+            // steps
+            // {
+            //     echo 'testing the application in feature/f1'
+            // }
         }
         stage('deploy')
         {
@@ -73,7 +73,7 @@ pipeline
         }
         success
         {
-            echo ''send am email that build is stable {params.VERSION}''
+            echo 'send am email that build is stable {params.VERSION}'
             //Execute integration test
         }
         failure
