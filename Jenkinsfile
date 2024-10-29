@@ -21,7 +21,7 @@ pipeline
             steps
             {
                 echo 'building the application '
-                echo 'current version > ${NEW_VERSION} ${SERVERCREDENTIALS}'
+                //echo 'current version > ${NEW_VERSION} ${SERVERCREDENTIALS}'
                 sh 'mvn --version'
                 script
                 {
