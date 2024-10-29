@@ -1,6 +1,8 @@
 package com.templatedriven.booking.repository;
 
+import com.templatedriven.booking.dto.Hotel;
 import com.templatedriven.booking.dto.Room;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,6 +11,9 @@ import java.util.Random;
 
 @Repository
 public class RoomRepository implements IRepository<Room> {
+
+    @Autowired
+    public HotelRepository _hotelRepository;
     @Override
     public List<Room> GetAllData() {
         List<Room> roomList = new ArrayList<Room>();
@@ -20,6 +25,10 @@ public class RoomRepository implements IRepository<Room> {
             room.setFloor(1);
             if(id>10)
                 room.setFloor(id%10);
+            Random rand = new Random();
+            int hotelId = rand.nextInt(50);
+            Hotel hotel =_hotelRepository.GetData(hotelId) ;
+            room.setHotel(hotel);
             roomList.add(room);
         }
         return roomList;

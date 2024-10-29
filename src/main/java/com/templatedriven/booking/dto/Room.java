@@ -10,4 +10,15 @@ public class Room extends BaseModel {
     public void setFloor(Integer Floor) {
         this._floor = Floor;
     }
+
+
+    private Hotel _hotel;
+
+    public Hotel getHotel() {
+        return _hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this._hotel = hotel;
+    }
 }
