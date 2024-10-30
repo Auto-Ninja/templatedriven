@@ -59,10 +59,10 @@ pipeline
             steps
             {
                 echo 'deploying the application'
-                script
-                {
-                    gv.TestFunc()
-                }
+                //script
+                //{
+                    //gv.TestFunc()
+                //}
                 // withCredentials([
                 //     usernamePassword(credentials:'Server-credentials',
                 //     usernameVariable:USER,passwordVariable:PWD
