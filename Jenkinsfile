@@ -78,16 +78,16 @@ pipeline
     {
         always
         {
-            echo 'send an email to team'
+            echo 'Send an email to team'
         }
         success
         {
-            echo 'send am email that build is stable {params.VERSION}'
+            echo 'Send a success email that build is stable {params.VERSION}'
             //Execute integration test
         }
         failure
         {
-            echo 'send am email to build triggered person'
+            echo 'Send a failure email to build triggered person'
         }
     }
 }
