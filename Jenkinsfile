@@ -1,93 +1,63 @@
-def gv
-pipeline
-{
-    agent any
-    environment
-    {
-        NEW_VERSION = '2.0.1'
-        //SERVERCREDENTIALS =credentials('Server-credentials')
-    }
-    parameters
-    {
-        choice(name: 'VERSION',choices: ['1.2.1','1.2.2','2.1.0'])
-        booleanParam(name: 'executeTests',defaultValue:true,description:'Decide to execute test in the build')
+pipeline {
+    parameters {
         choice(name: 'PLATFORM_FILTER', choices: ['all', 'linux', 'windows', 'mac'], description: 'Run on specific platform')
     }
-    tools
-    {
-        maven 'M2'
-        groovy 'Groovy'
-    }
-    stages 
-    {
-        stage('build')
-        {
-            steps
-            {
-                echo 'building the application '
-                //echo 'current version > ${NEW_VERSION} ${SERVERCREDENTIALS}'
-                sh 'mvn --version'
-            }
-        }
-        stage('test')
-        {
-            when
-            {
-                expression
-                {
-                    BRANCH_NAME == 'master' || BRANCH_NAME == 'master'
+    agent none
+    stages {
+        stage('BuildAndTest') {
+            matrix {
+                agent {
+                    label "${PLATFORM}-agent"
+                }
+                when { anyOf {
+                    expression { params.PLATFORM_FILTER == 'all' }
+                    expression { params.PLATFORM_FILTER == env.PLATFORM }
+                } }
+                axes {
+                    axis {
+                        name 'PLATFORM'
+                        values 'linux', 'windows', 'mac'
+                    }
+                    axis {
+                        name 'BROWSER'
+                        values 'firefox', 'chrome', 'safari', 'edge'
+                    }
+                }
+                excludes {
+                    exclude {
+                        axis {
+                            name 'PLATFORM'
+                            values 'linux'
+                        }
+                        axis {
+                            name 'BROWSER'
+                            values 'safari'
+                        }
+                    }
+                    exclude {
+                        axis {
+                            name 'PLATFORM'
+                            notValues 'windows'
+                        }
+                        axis {
+                            name 'BROWSER'
+                            values 'edge'
+                        }
+                    }
+                }
+                stages {
+                    stage('Build') {
+                        steps {
+                            echo "Do Build for ${PLATFORM} - ${BROWSER}"
+                        }
+                    }
+                    stage('Test') {
+                        steps {
+                            echo "Do Test for ${PLATFORM} - ${BROWSER}"
+                        }
+                    }
                 }
             }
-            steps
-            {
-                echo 'testing the application in master dev code'
-            }
-            // when
-            // {
-            //      expression
-            //     {
-            //          BRANCH_NAME == 'feature/f1' && params.executeTests
-            //     }
-            // }
-            // steps
-            // {
-            //     echo 'testing the application in feature/f1'
-            // }
-        }
-        stage('deploy')
-        {
-            steps
-            {
-                echo 'deploying the application'
-                //script
-                //{
-                    //gv.TestFunc()
-                //}
-                // withCredentials([
-                //     usernamePassword(credentials:'Server-credentials',
-                //     usernameVariable:USER,passwordVariable:PWD
-                //     )
-                // ])
-                // {
-                //     sh "some script ${USER} ${PWD}"
-                // }
-            }
-        }        
-    }
-    post
-    {
-        always
-        {
-            echo 'Send an email to team'
-        }
-        success
-        {
-            echo 'Send a success email that build is stable {params.VERSION}'
-            //Execute integration test
-        }
-        failure
-        {
-            echo 'Send a failure email to build triggered person'
         }
     }
 }
